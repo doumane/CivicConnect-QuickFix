@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CivicConnect QuickFix</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #3498db; color: white; border: none; padding: 10px 15px; width: 100%; border-radius: 4px; font-size: 16px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .report-list { margin-top: 20px; }
+        .report-item { background: #ecf0f1; padding: 10px; margin-bottom: 10px; border-radius: 4px; border-left: 5px solid #3498db; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>CivicConnect QuickFix</h2>
+    <p style="text-align: center; color: #7f8c8d;">A quick platform to report and track local community issues</p>
+    
+    <div class="form-group">
+        <label for="title">Issue Title:</label>
+        <input type="text" id="title" placeholder="e.g., Streetlight Outage">
+    </div>
+    
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <select id="category">
+            <option value="Street Lighting">Street Lighting</option>
+            <option value="Roads and Pavements">Roads and Pavements (Potholes)</option>
+            <option value="Sanitation & Waste">Sanitation & Waste</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description & Location:</label>
+        <textarea id="description" rows="3" placeholder="Enter details and exact location..."></textarea>
+    </div>
+    
+    <button onclick="addReport()">Submit Report</button>
+
+    <div class="report-list" id="reportList">
+        <h3>Submitted Reports:</h3>
+    </div>
+</div>
+
+<script>
+    function addReport() {
+        const title = document.getElementById('title').value;
+        const category = document.getElementById('category').value;
+        const description = document.getElementById('description').value;
+
+        if(!title || !description) {
+            alert('Please fill in all required fields!');
+            return;
+        }
+
+        const list = document.getElementById('reportList');
+        const item = document.createElement('div');
+        item.className = 'report-item';
+        item.innerHTML = `<strong>${title}</strong> (${category})<p>${description}</p>`;
+        
+        list.appendChild(item);
+
+        // Clear inputs
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        alert('Report submitted successfully!');
+    }
+</script>
+
+</body>
+</html>
